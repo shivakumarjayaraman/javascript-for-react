@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // ============================================================
 // Session 2 Exercise: Functions & Control Flow
 // Run with: node exercise.js
@@ -20,15 +21,15 @@ const users = [
 // TODO: Write an arrow function `fullGreeting` that takes (name, role)
 //   and returns: "Hello, Alice! You are logged in as admin."
 //   Use a template literal. Use implicit return (no braces).
-
-
+const fullGreeting = (name, role) => `Hello ${name}! You are logged in as ${role}`
 // TODO: Write an arrow function `isAdult` that takes age and returns
 //   true if age >= 18, false otherwise. Use implicit return.
+const isAdult = age => age >=18
 
 
 // Test:
-// console.log(fullGreeting('Alice', 'admin'))
-// console.log(isAdult(17), isAdult(18))
+console.log(fullGreeting('Alice', 'admin'))
+console.log(isAdult(17), isAdult(18))
 
 
 // ── 2. Default Parameters ────────────────────────────────────
@@ -36,10 +37,12 @@ const users = [
 //   and returns a string like "88 pts" or "42 xp".
 //   Use implicit return.
 
+const formatScore = (score, units='pts') => `${score} ${units}`
+
 
 // Test:
-// console.log(formatScore(88))         // "88 pts"
-// console.log(formatScore(42, 'xp'))   // "42 xp"
+console.log(formatScore(88))         // "88 pts"
+console.log(formatScore(42, 'xp'))   // "42 xp"
 
 
 // ── 3. Ternary ───────────────────────────────────────────────
@@ -47,16 +50,20 @@ const users = [
 //   'Adult' if age >= 18, otherwise 'Minor'.
 //   Use a ternary — one line, implicit return.
 
+const ageStatus = age => (age >=18) ? "Adult" : "Minor";
 
 // TODO: Write a function `roleBadge` that takes a role string and returns
 //   the matching badge using an object map + ??.
 //   Mappings: admin → '★ Admin', editor → '✎ Editor', viewer → '👁 Viewer'
 //   Any other role → 'Guest'
+//   Mappings: admin → '★ Admin', editor → 
+const badges = {admin: 'Admin',editor: '✎ Editor',viewer: '👁 Viewer'}
+const roleBadge = role => badges[role] ?? "Guest"
 
 
 // Test:
-// console.log(ageStatus(17), ageStatus(25))
-// console.log(roleBadge('admin'), roleBadge('guest'), roleBadge('unknown'))
+console.log(ageStatus(17), ageStatus(25))
+console.log(roleBadge('admin'), roleBadge('guest'), roleBadge('unknown'))
 
 
 // ── 4. && Short-Circuit ──────────────────────────────────────
@@ -65,10 +72,12 @@ const users = [
 //   Otherwise return null.
 //   Use && (no if statement, no ternary).
 
+const adminOnlyMessage = user => ((user.role === 'admin') && "Access granted: secret dashboard") || null
+
 
 // Test:
-// console.log(adminOnlyMessage(users[0]))  // "Access granted..."
-// console.log(adminOnlyMessage(users[1]))  // null
+console.log(adminOnlyMessage(users[0]))  // "Access granted..."
+console.log(adminOnlyMessage(users[1]))  // null
 
 
 // ── 5. || vs ?? ──────────────────────────────────────────────
@@ -78,6 +87,13 @@ const users = [
 //
 // Expected output shows where || and ?? differ (score of 0).
 // Use a regular for...of loop (we haven't done .map() yet).
+
+for (let user of users) {
+    console.log(user.name, user.score || "No score")
+}
+for (let user of users) {
+    console.log(user.name, user.score ?? "No score")
+}
 
 
 // ── 6. Putting it together ───────────────────────────────────
@@ -94,3 +110,13 @@ const users = [
 //
 // Then call summarize() on each user in the array.
 
+const newFormatScore = score => {
+    val = score ?? "No score"
+    return val === "No score" ? val : formatScore(val)
+}
+const bio = bio => bio ?? "No bio"
+
+const summarize = u => `${roleBadge(u.role)} ${u.name} | ${ageStatus(u.age)} | Score: ${newFormatScore(u.score)} |Bio: ${bio(u.bio)}`
+for (let user of users) {
+    console.log(summarize(user))
+}
