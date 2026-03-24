@@ -48,7 +48,7 @@
 //   findById(products, id) should return the product with the matching id,
 //   or undefined if not found.
 
-// import getProducts, { findById } from './products.js'
+// import { findById } from './products.js'
 
 // Test (uncomment after adding findById to products.js):
 // console.log('\n--- 3. Named + default from same file ---')
@@ -67,7 +67,7 @@
 
 // Test (uncomment):
 // console.log('\n--- 4. Import alias ---')
-// console.log($('Price:', 399.99))   // "$399.99"
+// console.log($(399.99))   // "$399.99"
 
 
 // ── 5. Combine modules ───────────────────────────────────────
@@ -78,21 +78,3 @@
 
 // console.log('\n--- 5. Combined output ---')
 // (your code here)
-
-
-// ── 6. Reflection questions ───────────────────────────────────
-// Answer these by uncommenting and editing the strings below.
-
-// const Q1 = "When would you use a DEFAULT export instead of a NAMED export?"
-// const A1 = "TODO"
-
-// const Q2 = "What happens if you import { formatPrice } but format.js exports it as a default?"
-// const A2 = "TODO"
-
-// const Q3 = "Why should node_modules never be committed to git?"
-// const A3 = "TODO"
-
-// console.log('\n--- 6. Reflection ---')
-// console.log('Q1:', Q1, '\nA1:', A1)
-// console.log('Q2:', Q2, '\nA2:', A2)
-// console.log('Q3:', Q3, '\nA3:', A3)
